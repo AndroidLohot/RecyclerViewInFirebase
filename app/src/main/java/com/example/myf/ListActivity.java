@@ -69,6 +69,15 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
+                User user=dataSnapshot.getValue(User.class);
+                user.setuId(dataSnapshot.getKey());
+
+
+                usersList.remove(user);
+                adapter.notifyDataSetChanged();
+
+
+
             }
 
             @Override

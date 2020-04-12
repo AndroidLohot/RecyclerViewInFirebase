@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myf.Person.User;
 import com.example.myf.R;
 import com.example.myf.ShowActivity;
+import com.example.myf.utilPack.RemuveUser;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+
+import static com.example.myf.utilPack.RemuveUser.rUser;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
@@ -53,6 +59,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 intent.putExtra(UserId,uId);
 
                 context.startActivity(intent);
+            }
+        });
+
+        holder.tvShowName.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                String uId=user.getuId();
+
+                Task task=RemuveUser.rUser(uId);
+
+                task.addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+
+                        Toast.makeText(context,"User remove for list",Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+                return true;
             }
         });
 

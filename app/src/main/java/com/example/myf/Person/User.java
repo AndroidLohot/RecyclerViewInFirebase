@@ -1,5 +1,7 @@
 package com.example.myf.Person;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -74,5 +76,17 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return First_Name;
+    }
+
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+
+        if (obj instanceof User)
+        {
+            User user=(User)obj;
+            return this.uId.equals(user.getuId());
+        }
+        return false;
     }
 }
